@@ -2,6 +2,10 @@ import { generateTokens } from "../lib/utils.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs"
 
+
+
+
+
 // create async await function to get email pass anf fullname 
 export const signup = async (req, res) => {
   
@@ -11,11 +15,18 @@ export const signup = async (req, res) => {
  // try catch block to check all conditions 
  
     try {
+
+
+// if empty feilds in email, name and pass
+if(!email || !fullName || !password){
+    return res.status(400).json({ message: "Feilds empty please put the input " });
+}
+
+
+
 //checking pass lenght 
-    if (password.lenght < 6) {
-      return res
-        .status(400)
-        .json({ message: "password must me atleast 6 charactors" });
+    if (password.length < 6) {
+      return res.status(400).json({ message: "password must me atleast 6 charactors" });
     }
 //checking if email exists 
     const user = await User.findOne({ email });
