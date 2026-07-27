@@ -1,3 +1,5 @@
+
+//imported cloudinary api with creds in .env 
 import{v2 as cloudinary}from "cloudinary"
 
 import {config}from 'dotenv'

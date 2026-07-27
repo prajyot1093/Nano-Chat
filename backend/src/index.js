@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.route.js";
+getUsersForSidebar
 import { connectDB } from "./lib/db.js";
 import cookieParser from "cookie-parser";
 
@@ -20,6 +21,8 @@ const PORT = process.env.PORT || 5001;
 
 //Using AuthAPI route
 app.use("/api/auth", authRoutes);
+//message route
+app.use("/api/message", messageRoutes);
 
 //Calling connectDb function from lib/db.js
 connectDB();

@@ -3,6 +3,8 @@
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
 
+//created protectRoute Middleware
+//protectRoute is used to verify that profile exists while updating comparing userId 
 export const protectRoute = async (req, res, next) => {
   try {
     const token = req.cookies.jwt;
