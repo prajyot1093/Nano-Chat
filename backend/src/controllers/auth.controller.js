@@ -3,7 +3,7 @@ import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import cloudinary from "../lib/cloudinary.js";
 
-// create async await function to get email pass anf fullname
+// created signup controller 
 export const signup = async (req, res) => {
   //this was fetched through that middleware in index.js
   const { fullName, email, password } = req.body;
@@ -64,7 +64,7 @@ export const signup = async (req, res) => {
   }
 };
 
-
+//created login controller 
 export const login = async(req, res) => {
     const {email,password} = req.body;
     try{
@@ -97,7 +97,7 @@ res.status(500).json({
 
 };
 
-
+//created logout controller 
 export const logout = (req, res) => {
 
     try{
@@ -110,6 +110,8 @@ console.log("ERROR : ", error.message);
 
 };
 
+
+//created updateProfile controller
 export const updateProfile = async (req, res) => {
   try {
     const { profilePic } = req.body;
@@ -135,6 +137,8 @@ export const updateProfile = async (req, res) => {
   }
 };
 
+
+//created checkAuth controller
 export const checkAuth = (req,res)=>{
 try {
     res.status(200).json(req.user)
