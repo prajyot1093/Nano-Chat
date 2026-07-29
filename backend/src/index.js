@@ -4,6 +4,8 @@ import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js"
 import { connectDB } from "./lib/db.js";
 import cookieParser from "cookie-parser";
+import cors from "cors";
+
 
 dotenv.config();
 
@@ -16,6 +18,13 @@ app.use(express.json());
 //cookie parser middleware
 app.use(cookieParser());
 
+//use cors pkg to avoid cors error in ports in frontend and backend
+app.use(cors(
+{
+    origin:"http://localhost5173",
+   credentials:true,
+}
+))
 //setting up PORT from .env
 const PORT = process.env.PORT || 5001;
 
