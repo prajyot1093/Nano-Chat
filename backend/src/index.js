@@ -13,7 +13,8 @@ dotenv.config();
 const app = express();
 
 //middleware used to grab data for auth.controller
-app.use(express.json());
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 //cookie parser middleware
 app.use(cookieParser());

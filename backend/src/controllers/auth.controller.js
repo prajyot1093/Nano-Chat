@@ -53,7 +53,7 @@ export const signup = async (req, res) => {
         _id: NewUser._id,
         fullName: NewUser.fullName,
         email: NewUser.email,
-        PFP: NewUser.PFP,
+     profilePic: NewUser.profilePic,
       });
     } else {
       res.status(400).json({ message: "invalid user data" });
@@ -89,7 +89,7 @@ export const login = async(req, res) => {
         _id:user._id,
         fullName: user.fullName,
         email: user.email,
-        PFP: user.PFP,
+profilePic: user.profilePic,
      })
     }catch(error){
 console.log(error.message);
@@ -122,25 +122,32 @@ export const updateProfile = async (req, res) => {
     const userId = req.user._id;
 
     if (!profilePic) {
-      return res.status(400).json({ message: "Profile pic is required dear !" });
+      return res.status(400).json({
+        message: "Profile picture is required!",
+      });
     }
 
     const uploadResponse = await cloudinary.uploader.upload(profilePic);
+
     const updatedUser = await User.findByIdAndUpdate(
       userId,
-      { profilePic: uploadResponse.secure_url },
+      {
+        profilePic: uploadResponse.secure_url,
+      },
       { new: true }
     );
 
-    res.status(200).json({ message: "yeeeee pfp updated !!", user: updatedUser });
+    // Return only the updated user
+    res.status(200).json(updatedUser);
+
   } catch (error) {
-    console.log("error ala re baba", error);
+    console.log("Error updating profile:", error);
+
     res.status(500).json({
       message: "Internal Server Error",
     });
   }
 };
-
 
 //created checkAuth controller
 export const checkAuth = (req,res)=>{
