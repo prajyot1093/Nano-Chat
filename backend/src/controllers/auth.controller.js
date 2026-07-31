@@ -60,8 +60,12 @@ export const signup = async (req, res) => {
     }
 
   } catch (error) {
-    console.log("ERROR : ", error.message);
-  }
+  console.log("ERROR:", error);
+
+  res.status(500).json({
+    message: "Internal Server Error",
+  });
+}
 };
 
 //created login controller 

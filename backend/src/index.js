@@ -21,7 +21,7 @@ app.use(cookieParser());
 //use cors pkg to avoid cors error in ports in frontend and backend
 app.use(cors(
 {
-    origin:"http://localhost5173",
+    origin:"http://localhost:5173",
    credentials:true,
 }
 ))

@@ -10,7 +10,7 @@ import {Routes,Route,Navigate} from "react-router-dom";
 import{useAuth} from "./store/useAuthStore.js";
 import { useEffect } from "react";
 import {Loader} from "lucide-react";
-
+import { Toaster } from "react-hot-toast";
 const App=()=> {
   
   const { authUser,
@@ -62,7 +62,10 @@ const App=()=> {
     element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
   />
 </Routes>
-
+<Toaster
+  position="top-right"
+  reverseOrder={false}
+/>
     </div>
   );
 }
