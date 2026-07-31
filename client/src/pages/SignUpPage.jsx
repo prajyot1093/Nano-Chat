@@ -32,7 +32,10 @@ const SignUpPage = () => {
 
     const success = validateForm();
 
-    if (success === true) signup(formData);
+if (success === true) {
+  toast.success("Frontend toast");
+  signup(formData);
+}
   };
 
 
@@ -150,7 +153,7 @@ const SignUpPage = () => {
 
       <AuthImagePattern
         title="Join our community"
-        subtitle="Connect with friends, share moments, and stay in touch with your loved ones."
+        subtitle="Make lots of Memories and stay connected with your loved ones."
       />
     </div>
   );
