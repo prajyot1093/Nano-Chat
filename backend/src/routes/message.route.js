@@ -15,6 +15,6 @@ router.get("/users", protectRoute, getUsersForSidebar);
 router.get("/:id", protectRoute, getMessages);
 
 // Send a message to a specific user
-router.post("/:id", protectRoute, sendMessages);
+router.post("/send/:id", protectRoute, sendMessages);
 
 export default router;

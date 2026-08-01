@@ -1,43 +1,35 @@
 import express from "express";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.route.js";
-import messageRoutes from "./routes/message.route.js"
+import messageRoutes from "./routes/message.route.js";
 import { connectDB } from "./lib/db.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
-
 dotenv.config();
 
-//store server in a variable to perform operations
 const app = express();
 
-//middleware used to grab data for auth.controller
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
-//cookie parser middleware
 app.use(cookieParser());
 
-//use cors pkg to avoid cors error in ports in frontend and backend
-app.use(cors(
-{
-    origin:"http://localhost:5173",
-   credentials:true,
-}
-))
-//setting up PORT from .env
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
+
 const PORT = process.env.PORT || 5001;
 
-//Using AuthAPI route
+// Routes
 app.use("/api/auth", authRoutes);
-//message route
-app.use("/api/message", messageRoutes);
+app.use("/api/messages", messageRoutes); // <-- Fixed (messages instead of message)
 
-//Calling connectDb function from lib/db.js
 connectDB();
 
-//listening server on PORT stored in .env
 app.listen(PORT, () => {
-  console.log("Server is running at " + PORT);
+  console.log(`Server is running on port ${PORT}`);
 });
