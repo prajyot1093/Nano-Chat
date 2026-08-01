@@ -5,6 +5,8 @@ import SignUpPage from "./pages/SignUpPage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
+import { useThemeStore } from "./store/useThemeStore";
+
 
 import {Routes,Route,Navigate} from "react-router-dom";
 import{useAuth} from "./store/useAuthStore.js";
@@ -16,7 +18,7 @@ const App=()=> {
   const { authUser,
   checkAuth,
   isCheckingAuth} = useAuth();
-  
+    const { theme } = useThemeStore();
   useEffect(()=>{
     checkAuth();
   },[checkAuth]);
@@ -33,7 +35,9 @@ const App=()=> {
   
   
   return (
-    <div className="">
+
+
+    <div data-theme={theme} >
 <Navbar />
 
 <Routes>

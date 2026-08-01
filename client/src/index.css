@@ -1,2 +1,8 @@
 @import "tailwindcss";
-@plugin "daisyui";
+
+/* Define the plugin and its options in one place */
+@plugin "daisyui" {
+  themes: all;
+  prefix: "daisy-";
+  logs: false;
+}
