@@ -38,21 +38,24 @@ export const useChatStore = create((set, get) => ({
   },
 
   sendMessage: async (messageData) => {
-    const { selectedUser, messages } = get();
+    const { selectedUser } = get();
 
     if (!selectedUser) return;
 
     try {
       const res = await axiosInstance.post(
-        `/messages/${selectedUser._id}`,
+        `/messages/send/${selectedUser._id}`,
         messageData
       );
 
-      set({
-        messages: [...messages, res.data],
-      });
+      set((state) => ({
+        messages: [...state.messages, res.data],
+      }));
+
+      return res.data;
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to send message");
+      throw error;
     }
   },
 
@@ -61,4 +64,4 @@ export const useChatStore = create((set, get) => ({
   unsubscribeFromMessages: () => {},
 
   setSelectedUser: (selectedUser) => set({ selectedUser }),
-}));
+})); 

@@ -2,7 +2,6 @@ import User from "../models/user.model.js";
 import Message from "../models/message.model.js";
 import cloudinary from "../lib/cloudinary.js";
 
-// Get users for sidebar
 export const getUsersForSidebar = async (req, res) => {
   try {
     const loggedInUserId = req.user._id;
@@ -18,7 +17,6 @@ export const getUsersForSidebar = async (req, res) => {
   }
 };
 
-// Get messages
 export const getMessages = async (req, res) => {
   try {
     const { id: userToChatId } = req.params;
@@ -29,7 +27,7 @@ export const getMessages = async (req, res) => {
         { senderId: myId, reciverId: userToChatId },
         { senderId: userToChatId, reciverId: myId },
       ],
-    });
+    }).sort({ createdAt: 1 });
 
     res.status(200).json(messages);
   } catch (error) {
@@ -38,12 +36,17 @@ export const getMessages = async (req, res) => {
   }
 };
 
-// Send message
 export const sendMessages = async (req, res) => {
   try {
     const { text, image } = req.body;
     const { id: reciverId } = req.params;
     const senderId = req.user._id;
+
+    if (!text?.trim() && !image) {
+      return res.status(400).json({
+        message: "Message cannot be empty",
+      });
+    }
 
     let imageUrl;
 
@@ -55,13 +58,11 @@ export const sendMessages = async (req, res) => {
     const newMessage = new Message({
       senderId,
       reciverId,
-      text,
+      text: text?.trim(),
       image: imageUrl,
     });
 
     await newMessage.save();
-
-    // Socket.io logic will go here
 
     res.status(201).json(newMessage);
   } catch (error) {
