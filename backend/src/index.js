@@ -21,11 +21,13 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin:
+      process.env.NODE_ENV === "production"
+        ? process.env.CLIENT_URL
+        : "http://localhost:5173",
     credentials: true,
   })
 );
-
 const PORT = process.env.PORT || 5001;
 
 // Routes
@@ -35,11 +37,11 @@ app.use("/api/messages", messageRoutes); // <-- Fixed (messages instead of messa
 
 //serving both api in same place 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
-  });
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+});
 }
 
 
