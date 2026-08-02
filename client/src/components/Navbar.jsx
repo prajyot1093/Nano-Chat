@@ -24,6 +24,7 @@ const Navbar = () => {
           <p className="text-xs text-base-content/60">
             Connecting humans and memes 🫶
           </p>
+        <p className="text-xs text-base-content/60"> ~ Developed by Prajyot</p>
         </div>
       </Link>
 
