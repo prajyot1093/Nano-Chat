@@ -291,11 +291,6 @@ git push origin feature-name
 
 https://github.com/prajyot1093
 
-### LinkedIn
-
-_Add your LinkedIn profile here_
-
----
 
 # 📄 License
 
@@ -307,4 +302,3 @@ This project is licensed under the **MIT License**.
 
 If you found this project helpful, consider giving it a ⭐ on GitHub.
 
-It motivates future development and improvements.
