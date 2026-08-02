@@ -4,9 +4,7 @@ A modern real-time chat application built using the **MERN Stack** and **Socket.
 
 ---
 
-## 🌐 Live Demo
-
-🚀 **Live Website:** _Coming Soon_
+🚀 Live Website:( https://nano-chat-1.onrender.com )
 
 
 
